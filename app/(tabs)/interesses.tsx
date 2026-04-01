@@ -1,12 +1,10 @@
 import { Image } from 'expo-image';
-import { StyleSheet } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 
 import ParallaxScrollView from '@/components/parallax-scroll-view';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { Link } from 'expo-router';
-
-import ImagemFLorianopolis from '../../assets/images/florianopolis.jpg'
 
 export default function HomeScreen() {
   return (
@@ -14,18 +12,20 @@ export default function HomeScreen() {
       headerBackgroundColor={{ light: '#4FB6A6', dark: '#1D3D47' }}
       headerImage={
         <Image
-          source={ImagemFLorianopolis}
+          source={{
+            uri: 'https://images.unsplash.com/photo-1590086782957-93c06ef21604',
+          }}
           style={styles.headerImage}
         />
       }>
 
       <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">FloriPasse</ThemedText>
+        <ThemedText type="title">FloriPasse 🌴</ThemedText>
       </ThemedView>
 
       <ThemedView style={styles.stepContainer}>
         <ThemedText type="subtitle">
-          Explore Florianópolis
+          Interesses
         </ThemedText>
 
         <ThemedText>
