@@ -1,94 +1,110 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
+import { useState, useCallback } from 'react'
+import { View, Text, FlatList, Image, StyleSheet, TouchableOpacity } from 'react-native'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import { Link, useFocusEffect } from 'expo-router'
 
-import ParallaxScrollView from '@/components/parallax-scroll-view';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { Link } from 'expo-router';
+type Atracao = {
+  id: string
+  nome: string
+  bairro: string
+  thumbnail: string
+}
 
-export default function HomeScreen() {
+export default function InteressesScreen() {
+  const [interesses, setInteresses] = useState<Atracao[]>([])
+
+  useFocusEffect(
+    useCallback(() => {
+      carregar()
+    }, [])
+  )
+
+  async function carregar() {
+    const dados = await AsyncStorage.getItem('interesses')
+
+    if (!dados) return setInteresses([])
+
+    const lista: Atracao[] = JSON.parse(dados)
+
+    const ordenada = [...lista].sort((a, b) =>
+      a.nome.localeCompare(b.nome)
+    )
+
+    setInteresses(ordenada)
+  }
+
+  async function remover(id: string) {
+    const nova = interesses.filter(i => i.id !== id)
+
+    setInteresses(nova)
+    await AsyncStorage.setItem('interesses', JSON.stringify(nova))
+  }
+
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#4FB6A6', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={{
-            uri: 'https://images.unsplash.com/photo-1590086782957-93c06ef21604',
-          }}
-          style={styles.headerImage}
+    <View style={styles.container}>
+      {interesses.length === 0 ? (
+        <Text style={styles.vazio}>
+          Nenhuma atração adicionada.
+        </Text>
+      ) : (
+        <FlatList
+          data={interesses}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
+            <View style={styles.card}>
+              <Link href={{pathname: '/atracao/[id]', params: { id: item.id }}} asChild>
+                <TouchableOpacity style={styles.row}>
+                  <Image source={{ uri: item.thumbnail }} style={styles.image} />
+
+                  <View style={styles.info}>
+                    <Text style={styles.nome}>{item.nome}</Text>
+                    <Text style={styles.bairro}>{item.bairro}</Text>
+                  </View>
+                </TouchableOpacity>
+              </Link>
+
+              <TouchableOpacity
+                style={styles.removeButton}
+                onPress={() => remover(item.id)}
+              >
+                <Text style={styles.removeText}>Remover</Text>
+              </TouchableOpacity>
+            </View>
+          )}
         />
-      }>
-
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">FloriPasse 🌴</ThemedText>
-      </ThemedView>
-
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">
-          Interesses
-        </ThemedText>
-
-        <ThemedText>
-          Com o FloriPasse você pode visitar diversas atrações turísticas
-          da ilha com praticidade e economia. Escolha seu passe e comece
-          a explorar!
-        </ThemedText>
-      </ThemedView>
-
-      <ThemedView style={styles.menuContainer}>
-        <Link href="/(tabs)/atracoes" style={styles.link}>
-          <ThemedText type="defaultSemiBold">Ver Atrações</ThemedText>
-        </Link>
-
-        <Link href="/(tabs)/passes" style={styles.link}>
-          <ThemedText type="defaultSemiBold">Comprar Passe</ThemedText>
-        </Link>
-
-        <Link href="/(tabs)/interesses" style={styles.link}>
-          <ThemedText type="defaultSemiBold">Meus Interesses</ThemedText>
-        </Link>
-      </ThemedView>
-
-      <ThemedView style={styles.footer}>
-        <ThemedText>
-          Aproveite praias, trilhas, cultura e muito mais na Ilha da Magia!
-        </ThemedText>
-      </ThemedView>
-
-    </ParallaxScrollView>
-  );
+      )}
+    </View>
+  )
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    marginTop: 10,
-    marginBottom: 10,
-  },
+  container: { flex: 1, padding: 10 },
 
-  stepContainer: {
-    gap: 8,
-    marginBottom: 20,
-  },
+  vazio: { textAlign: 'center', marginTop: 20 },
 
-  menuContainer: {
-    gap: 12,
-    marginBottom: 20,
-  },
-
-  link: {
-    padding: 12,
-    backgroundColor: '#4FB6A6',
+  card: {
+    backgroundColor: '#fff',
     borderRadius: 10,
+    marginBottom: 12,
+    overflow: 'hidden',
+    elevation: 2
   },
 
-  footer: {
-    marginTop: 10,
-    marginBottom: 30,
+  row: { flexDirection: 'row' },
+
+  image: { width: 100, height: 100 },
+
+  info: { padding: 10, justifyContent: 'center' },
+
+  nome: { fontSize: 16, fontWeight: 'bold' },
+
+  bairro: { fontSize: 14, color: 'gray' },
+
+  removeButton: {
+    backgroundColor: '#ff5c5c',
+    padding: 10,
+    alignItems: 'center'
   },
 
-  headerImage: {
-    height: 200,
-    width: '100%',
-    position: 'absolute',
-  },
-});
+  removeText: { color: '#fff', fontWeight: 'bold' }
+})
