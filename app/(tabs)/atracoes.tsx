@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { View, Text, FlatList, Image, StyleSheet, TouchableOpacity } from 'react-native'
 import { Link } from 'expo-router'
+import images from '../../helper/images'
 
 type Atracao = {
   id: string
@@ -32,9 +33,13 @@ export default function AtracoesScreen() {
         data={atracoes}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <Link href={{pathname: '/atracao/[id]', params: { id: item.id }}} asChild>
+          <Link href={{ pathname: '/atracao/[id]', params: { id: item.id } }} asChild>
             <TouchableOpacity style={styles.card}>
-              <Image source={{ uri: item.thumbnail }} style={styles.image} />
+              <Image
+                source={images[item.thumbnail as keyof typeof images]}
+                style={styles.image}
+                resizeMode="cover"
+              />
 
               <View style={styles.info}>
                 <Text style={styles.nome}>{item.nome}</Text>

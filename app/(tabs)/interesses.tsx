@@ -2,6 +2,7 @@ import { useState, useCallback } from 'react'
 import { View, Text, FlatList, Image, StyleSheet, TouchableOpacity } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { Link, useFocusEffect } from 'expo-router'
+import images from '../../helper/images'
 
 type Atracao = {
   id: string
@@ -54,7 +55,7 @@ export default function InteressesScreen() {
             <View style={styles.card}>
               <Link href={{pathname: '/atracao/[id]', params: { id: item.id }}} asChild>
                 <TouchableOpacity style={styles.row}>
-                  <Image source={{ uri: item.thumbnail }} style={styles.image} />
+                  <Image source={images[item.thumbnail as keyof typeof images]} style={styles.image} />
 
                   <View style={styles.info}>
                     <Text style={styles.nome}>{item.nome}</Text>

@@ -1,9 +1,12 @@
 import { useEffect, useState } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, FlatList } from 'react-native'
+import uuid from 'react-native-uuid'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { Link } from 'expo-router'
 
 type Passe = {
   id: string
+  codigo: string
   tipo: string
   limite: number
   validadeDias: number
@@ -25,7 +28,9 @@ export default function PassesScreen() {
 
   async function carregarPasses() {
     const dados = await AsyncStorage.getItem('passes')
-    if (dados) setPasses(JSON.parse(dados))
+    if (dados) {
+      setPasses(JSON.parse(dados))
+    }
   }
 
   async function salvarPasses(novosPasses: Passe[]) {
@@ -36,6 +41,7 @@ export default function PassesScreen() {
   function comprarPasse(opcao: any) {
     const novoPasse: Passe = {
       id: Date.now().toString(),
+      codigo: uuid.v4().toString(),
       tipo: opcao.tipo,
       limite: opcao.limite,
       validadeDias: opcao.validadeDias,
@@ -45,25 +51,45 @@ export default function PassesScreen() {
     salvarPasses([...passes, novoPasse])
   }
 
-  function calcularStatus(passe: Passe) {
+  function calcularExpiracao(passe: Passe) {
     const compra = new Date(passe.dataCompra)
-    const hoje = new Date()
 
-    const diffDias = Math.floor(
-      (hoje.getTime() - compra.getTime()) / (1000 * 60 * 60 * 24)
-    )
+    const expiracao = new Date(compra)
+    expiracao.setDate(compra.getDate() + passe.validadeDias)
 
-    return diffDias <= passe.validadeDias ? 'Ativo' : 'Expirado'
+    return expiracao
+  }
+
+  function calcularStatus(passe: Passe) {
+    const agora = new Date()
+    const expiracao = calcularExpiracao(passe)
+
+    return agora <= expiracao ? 'Ativo' : 'Expirado'
+  }
+
+  function formatarData(data: Date) {
+    return data.toLocaleDateString('pt-BR')
   }
 
   function renderPasse({ item }: { item: Passe }) {
+    const expiracao = calcularExpiracao(item)
+
     return (
-      <View style={styles.passeCard}>
-        <Text style={styles.titulo}>{item.tipo}</Text>
-        <Text>{item.limite} atrações</Text>
-        <Text>{item.validadeDias} dias</Text>
-        <Text>Status: {calcularStatus(item)}</Text>
-      </View>
+      <Link
+        href={{
+          pathname: '/passe/[id]',
+          params: { id: item.id }
+        }}
+        asChild
+      >
+        <TouchableOpacity style={styles.passeCard}>
+          <Text style={styles.titulo}>{item.tipo}</Text>
+          <Text>{item.limite} atrações</Text>
+          <Text>{item.validadeDias} dias</Text>
+          <Text>Status: {calcularStatus(item)}</Text>
+          <Text>Expira em: {formatarData(expiracao)}</Text>
+        </TouchableOpacity>
+      </Link>
     )
   }
 

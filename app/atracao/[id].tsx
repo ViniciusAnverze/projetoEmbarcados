@@ -1,7 +1,8 @@
-import { useLocalSearchParams } from 'expo-router'
+import { useLocalSearchParams, Stack } from 'expo-router'
 import { useEffect, useState } from 'react'
 import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import images from '../../helper/images'
 
 type Atracao = {
   id: string
@@ -70,19 +71,22 @@ export default function Detalhe() {
   }
 
   return (
-    <ScrollView style={styles.container}>
-      <Image source={{ uri: atracao.thumbnail }} style={styles.image} />
+    <>
+      <Stack.Screen options={{ title: atracao?.nome ?? 'Detalhe' }} />
+      <ScrollView style={styles.container}>
+        <Image source={images[atracao.thumbnail as keyof typeof images]} style={styles.image} />
 
-      <Text style={styles.nome}>{atracao.nome}</Text>
-      <Text style={styles.bairro}>{atracao.bairro}</Text>
-      <Text style={styles.desc}>{atracao.descricao}</Text>
+        <Text style={styles.nome}>{atracao.nome}</Text>
+        <Text style={styles.bairro}>{atracao.bairro}</Text>
+        <Text style={styles.desc}>{atracao.descricao}</Text>
 
-      <TouchableOpacity style={styles.botao} onPress={toggleInteresse}>
-        <Text style={styles.botaoTexto}>
-          {isInteressado ? 'Remover dos Interesses' : 'Adicionar aos Interesses'}
-        </Text>
-      </TouchableOpacity>
-    </ScrollView>
+        <TouchableOpacity style={isInteressado ? styles.botaoVermelho : styles.botaoVerde} onPress={toggleInteresse}>
+          <Text style={styles.botaoTexto}>
+            {isInteressado ? 'Remover dos Interesses' : 'Adicionar aos Interesses'}
+          </Text>
+        </TouchableOpacity>
+      </ScrollView>
+    </>
   )
 }
 
@@ -111,8 +115,15 @@ const styles = StyleSheet.create({
     marginBottom: 20
   },
 
-  botao: {
+  botaoVerde: {
     backgroundColor: '#4FB6A6',
+    padding: 15,
+    borderRadius: 10,
+    alignItems: 'center'
+  },
+
+  botaoVermelho: {
+    backgroundColor: '#d35858ff',
     padding: 15,
     borderRadius: 10,
     alignItems: 'center'
