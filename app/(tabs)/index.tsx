@@ -47,6 +47,10 @@ export default function HomeScreen() {
         <Link href="/(tabs)/interesses" style={styles.link}>
           <ThemedText type="defaultSemiBold">Meus Interesses</ThemedText>
         </Link>
+
+        <Link href="/(tabs)/reservas" style={styles.link}>
+          <ThemedText type="defaultSemiBold">Minhas Reservas</ThemedText>
+        </Link>
       </ThemedView>
 
       <ThemedView style={styles.footer}>

@@ -4,34 +4,109 @@
     "nome": "Praia da Joaquina",
     "bairro": "Lagoa da Conceição",
     "thumbnail": "praiaJoaquina",
-    "descricao": "Uma das praias mais famosas de Florianópolis, conhecida pelas dunas e prática de surf."
+    "imagemSecundaria": "praiaJoaquina2",
+    "descricao": "Uma das praias mais icônicas de Florianópolis, a Praia da Joaquina é famosa por suas ondas fortes, atraindo surfistas do mundo inteiro, além de suas extensas dunas de areia branca que permitem a prática de sandboard. Possui boa infraestrutura com restaurantes, estacionamento e fácil acesso, sendo um dos pontos turísticos mais visitados da ilha.",
+    "diferencial": "Ideal para quem busca aventura, seja no surf ou descendo as dunas de sandboard, além de ter um visual impressionante e vibe jovem.",
+    "videoUrl": "https://www.youtube.com/embed/6YQvJ5JvG7A",
+    "horario": "Aberta 24 horas",
+    "endereco": "Av. Pref. Acácio Garibaldi S. Thiago, s/n - Lagoa da Conceição, Florianópolis - SC",
+    "contato": {
+      "telefone": "48999990001",
+      "email": "contato@praiadajoaquina.com.br",
+      "whatsapp": "5548999990001"
+    },
+    "coordenadas": {
+      "lat": -27.6286,
+      "lng": -48.4493
+    },
+    "possuiReserva": false
   },
   {
     "id": "2",
     "nome": "Projeto Tamar",
     "bairro": "Barra da Lagoa",
     "thumbnail": "projetoTamar",
-    "descricao": "Centro de conservação de tartarugas marinhas."
+    "imagemSecundaria": "projetoTamar2",
+    "descricao": "O Projeto Tamar na Barra da Lagoa é um centro de conservação dedicado à proteção das tartarugas marinhas, oferecendo uma experiência educativa e interativa. O local conta com tanques de observação, exposições e atividades que explicam a importância da preservação ambiental, sendo uma ótima opção tanto para adultos quanto para crianças.",
+    "diferencial": "Perfeito para quem quer um passeio educativo e diferente, com contato próximo com tartarugas marinhas e foco em sustentabilidade.",
+    "videoUrl": "https://www.youtube.com/embed/YlJ6G7Xz2bU",
+    "horario": "Terça a domingo, das 10h às 17h",
+    "endereco": "Servidão do Pontal do Tamar, s/n - Barra da Lagoa, Florianópolis - SC",
+    "contato": {
+      "telefone": "48999990002",
+      "email": "contato@projetotamarfloripa.com.br",
+      "whatsapp": "5548999990002"
+    },
+    "coordenadas": {
+      "lat": -27.5745,
+      "lng": -48.4262
+    },
+    "possuiReserva": true
   },
   {
     "id": "3",
     "nome": "Fortaleza de São José",
     "bairro": "Jurerê",
     "thumbnail": "fortalezaSaoJorge",
-    "descricao": "Construção histórica com vista incrível."
+    "imagemSecundaria": "fortalezaSaoJorge2",
+    "descricao": "A Fortaleza de São José da Ponta Grossa é uma construção histórica do século XVIII que fazia parte do sistema de defesa da ilha. Restaurada e bem preservada, oferece uma combinação única de história, arquitetura colonial e vistas panorâmicas do mar e das ilhas ao redor.",
+    "diferencial": "Uma ótima escolha para quem gosta de história e quer apreciar uma das vistas mais bonitas e tranquilas da região de Jurerê.",
+    "videoUrl": "https://www.youtube.com/embed/3kL8ZzJwX7A",
+    "horario": "Todos os dias, das 09h às 17h",
+    "endereco": "Praia do Forte, s/n - Jurerê, Florianópolis - SC",
+    "contato": {
+      "telefone": "48999990003",
+      "email": "contato@fortalezasaose.com.br",
+      "whatsapp": "5548999990003"
+    },
+    "coordenadas": {
+      "lat": -27.4387,
+      "lng": -48.4986
+    },
+    "possuiReserva": true
   },
   {
     "id": "4",
     "nome": "Lagoa da Conceição",
     "bairro": "Lagoa",
     "thumbnail": "lagoaDaConceicao",
-    "descricao": "Região famosa por esportes aquáticos e vida noturna."
+    "imagemSecundaria": "lagoaDaConceicao2",
+    "descricao": "A Lagoa da Conceição é uma das regiões mais vibrantes de Florianópolis, combinando natureza, esportes e vida noturna. É muito procurada para atividades como stand up paddle, windsurf e passeios de barco, além de reunir diversos bares, restaurantes e festas ao redor.",
+    "diferencial": "Perfeita para quem quer um mix de natureza durante o dia e agito à noite, sendo um dos principais pontos de encontro da ilha.",
+    "videoUrl": "https://www.youtube.com/embed/fpJpGv0p7zQ",
+    "horario": "Aberta 24 horas",
+    "endereco": "Lagoa da Conceição, Florianópolis - SC",
+    "contato": {
+      "telefone": "48999990004",
+      "email": "contato@lagoaconceicao.com.br",
+      "whatsapp": "5548999990004"
+    },
+    "coordenadas": {
+      "lat": -27.6049,
+      "lng": -48.4575
+    },
+    "possuiReserva": false
   },
   {
     "id": "5",
     "nome": "Trilha da Lagoinha do Leste",
     "bairro": "Pântano do Sul",
     "thumbnail": "trilhaLagoinhaLeste",
-    "descricao": "Trilha com uma das vistas mais bonitas da ilha."
+    "imagemSecundaria": "trilhaLagoinhaLeste2",
+    "descricao": "A Trilha da Lagoinha do Leste leva a uma das praias mais preservadas e impressionantes de Florianópolis. O acesso é feito apenas por trilha ou barco, o que mantém o local praticamente intocado. O percurso exige preparo físico, mas recompensa com vistas deslumbrantes, natureza selvagem e uma praia de águas limpas e tranquilas.",
+    "diferencial": "Ideal para aventureiros que buscam um lugar mais isolado, com sensação de descoberta e contato intenso com a natureza.",
+    "videoUrl": "https://www.youtube.com/embed/2p6CzKz9FzE",
+    "horario": "Todos os dias, das 06h às 18h",
+    "endereco": "Pântano do Sul, Florianópolis - SC",
+    "contato": {
+      "telefone": "48999990005",
+      "email": "contato@lagoinhaleste.com.br",
+      "whatsapp": "5548999990005"
+    },
+    "coordenadas": {
+      "lat": -27.7805,
+      "lng": -48.5108
+    },
+    "possuiReserva": false
   }
 ]
